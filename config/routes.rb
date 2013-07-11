@@ -1,5 +1,6 @@
 SampleApp::Application.routes.draw do
   resources :users
+  resources :sessions, only: [:new, :create, :destroy]
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
@@ -14,6 +15,8 @@ SampleApp::Application.routes.draw do
   get '/about' => 'static_pages#about'
   get '/contact' => 'static_pages#contact'
   get '/signup' => 'users#new'
+  get '/signin' => 'sessions#new'
+  get '/signout' => 'sessions#destroy', via: :delete
 
 
   # Example of named route that can be invoked with purchase_url(id: product.id)
