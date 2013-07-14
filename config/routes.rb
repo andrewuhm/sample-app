@@ -16,7 +16,8 @@ SampleApp::Application.routes.draw do
   get '/contact' => 'static_pages#contact'
   get '/signup' => 'users#new'
   get '/signin' => 'sessions#new'
-  get '/signout' => 'sessions#destroy', via: :delete
+  
+  match '/signout', to: 'sessions#destroy', via: :delete
 
 
   # Example of named route that can be invoked with purchase_url(id: product.id)

@@ -6,7 +6,7 @@
 development:
   adapter: postgresql
   host: localhost
-  username: andrew.uhm 
+  username: andrewuhm 
   password: 
   database: dev
   pool: 5
@@ -18,7 +18,7 @@ development:
 test:
   adapter: postgresql
   host: localhost
-  username: andrew.uhm 
+  username: andrewuhm 
   password: 
   database: testdb
   pool: 5
