@@ -51,6 +51,7 @@ describe "User pages" do
 
   	it { should have_selector('h1', text: 'Sign up') }
   	it { should have_title(full_title('Sign up')) }
+
   end
 
   describe "profile_page" do
@@ -82,12 +83,6 @@ describe "User pages" do
     end
 
     describe "with valid information" do
-      #before do
-      #  fill_in "Name",   with: "Example User"
-       # fill_in "Email",  with: "user@example.com"
-      #  fill_in "Password", with: "foobar"
-      #  fill_in "Confirmation", with: "foobar"
-      #end
       before { valid_reg }
 
       it "should create a user" do
@@ -103,6 +98,7 @@ describe "User pages" do
         it { should have_link('Sign out') }
       end
     end
+
   end
 
   describe "edit" do

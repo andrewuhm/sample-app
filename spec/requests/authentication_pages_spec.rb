@@ -44,6 +44,11 @@ describe "Authentication" do
 
   		it { should_not have_link('Sign in', href: signin_path) }
 
+      describe "visiting new user creation page" do
+        before { visit signup_path }
+        specify { response.should redirect_to(root_path) }
+      end
+
       describe "followed by signout" do
         before { click_link "Sign out" }
         it { should have_link('Sign in') }
@@ -59,9 +64,7 @@ describe "Authentication" do
       describe "when attempting to visit a protected page" do
         before do
           visit edit_user_path(user)
-          fill_in "Email",      with: user.email
-          fill_in "Password",   with: user.password
-          click_button  "Sign in"
+          sign_in user
         end
 
         describe "after signing in" do
@@ -70,7 +73,6 @@ describe "Authentication" do
           end
         end
       end
-          
 
       describe "in the Users controller" do
         describe "visiting the edit page" do
