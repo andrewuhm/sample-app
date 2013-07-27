@@ -31,6 +31,44 @@ describe "Static pages" do
           expect(page).to have_selector("li##{item.id}", text: item.content)
         end
       end
+
+      it "should have pluralized microposts count" do
+        expect(page).to have_content('microposts')
+      end
+
+      describe "pagination" do
+        it "should paginate the feed" do
+          30.times { FactoryGirl.create(:micropost, user: user, content: "something here") }
+          visit root_path
+          page.should have_selector("div.pagination")
+        end
+      end
+    end
+
+    describe "for signed-in users pluralize" do
+      let(:user) { FactoryGirl.create(:user) }
+      before do 
+        FactoryGirl.create(:micropost, user: user, content: "Lorem ipsum")
+        sign_in user
+        visit root_path
+      end
+
+
+      it "should have single micropost count" do
+        expect(page).to have_content('1 micropost')
+      end
+
+      describe "multiple microposts" do
+        before do
+          FactoryGirl.create(:micropost, user: user, content: "Lorem ipsum")
+          FactoryGirl.create(:micropost, user: user, content: "Lorem ipsum")
+          visit root_path
+        end
+
+        it "should have multiple microposts count" do
+          expect(page).to have_content('3 microposts')
+        end
+      end
     end
 
   end
