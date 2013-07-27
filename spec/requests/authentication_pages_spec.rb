@@ -44,10 +44,10 @@ describe "Authentication" do
 
   		it { should_not have_link('Sign in', href: signin_path) }
 
-      describe "visiting new user creation page" do
-        before { visit signup_path }
-        specify { response.should redirect_to(root_path) }
-      end
+      #describe "visiting new user creation page" do
+      #  before { visit signup_path }
+      #  specify { response.should redirect_to(root_path) }
+      #end
 
       describe "followed by signout" do
         before { click_link "Sign out" }
@@ -88,6 +88,18 @@ describe "Authentication" do
         describe "visiting the user index" do
           before { visit users_path }
           it { should have_title('Sign in') }
+        end
+      end
+
+      describe "in the Microposts controller" do
+        describe "submitting to the create action" do
+          before { post microposts_path }
+          specify { expect(response).to redirect_to(signin_path) }
+        end
+
+        describe "submitting to the destroy action" do
+          before { delete micropost_path(FactoryGirl.create(:micropost)) }
+          specify { expect(response).to redirect_to(signin_path) }
         end
       end
 

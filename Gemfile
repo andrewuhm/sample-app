@@ -24,7 +24,7 @@ end
 group :test do
 	gem 'rb-fsevent', :require => false
 	gem 'growl'
-	gem 'factory_girl_rails'
+	gem 'factory_girl_rails', '4.2.1'
 end
 
 # Use SCSS for stylesheets
